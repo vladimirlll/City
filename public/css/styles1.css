@@ -1,0 +1,151 @@
+* { /*для всех элементов  */
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  /* background: #FFFFFF; */
+}
+
+.dl{/* для ссылок в хэтере */
+font-size: 20px;
+line-height: 23px;
+color: #000;
+}
+.dl:hover{
+  color: #000000;
+  font-weight: 900;
+}
+.navAdd{/* для хэттера */
+  width: 950px;
+  height: 80px;
+  left: 405px;
+  top: 0px
+}
+.navHeadAdd{/* для хэттера */
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: bold;
+  color: #272643;
+}
+.NamePunkt{/*для названии новых пунктов(*названии строк*)  */
+  font-size: 24px;
+  line-height: 33px;
+}
+.AboutPlp{/* Для "строки" о платформе */
+  text-align: justify;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 23px
+}
+body{
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-size: 16px;
+}
+.btn_darkHait{/*цвеа для первой кнопки  */
+  background: #272643;
+  color: #FFFFFF;
+}
+.btn{/*общее для обоих кнопок  */
+  width: 300px;
+  height: 80px;
+  left: 0px;
+  top: 0px;
+  border-radius: 100px;
+  font-size: 22px;
+  line-height: 28px;
+}
+/* .btn:hover{
+  background: #951260;
+  transform: rotate(180deg);
+
+} */
+.btn_haitDark {/* цвета для второй кнопки */
+  background: #ffffff;
+  color: #272643;
+}
+.box{/*для боксов предложении в первой "строке"  */
+  width: 500px;
+  color: #272643;
+}
+.ColorDreenWhait{/*цвета для второго бокса */
+background: #679186;
+color: #FFFFFF
+}
+.character1{/* дополнителые характеристики для  */
+  height: 550px;
+  left: 0px;
+  top: 0px;
+  font-size: 28px;
+  line-height: 33px;
+}
+.bestProfi{/*  дополнительные характеристики для лущх спецов*/
+  background-color: #E3F6F5;
+   width: 1000px;
+   top: 651px;
+}
+/*  */
+/* 
+ */
+ 
+.boxtext {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #323232;
+  }
+  .typecharacker {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 17px 20px;
+    gap: 10px;
+    width: 285px;
+    height: 50px;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+  
+  .registration {
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 33px;
+  }
+  
+  .ourcharestic {
+  
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .typeRassword {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    gap: 10px;
+    width: 285px;
+    height: 50px;
+    background: #F6F7F9;
+    border-radius: 8px;
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+  }
+  
+button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 26px 44px;
+  gap: 10px;
+  width: 320px;
+  height: 70px;
+  background: #272643;
+  border-radius: 100px;
+  flex: none;
+  order: 3;
+  flex-grow: 0;
+  color: #FFFFFF;
+}

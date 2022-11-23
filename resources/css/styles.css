@@ -1,0 +1,199 @@
+* {
+  /*для всех элементов  */
+  font-family: Arial, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  /* background: #FFFFFF; */
+}
+
+body {
+  /* background-color: aliceblue; */
+  color: black;
+  font-size: 16px;
+  height: 1029px
+}
+
+.inputName {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+}
+
+.dl {
+  /* для ссылок в хэтере */
+  font-size: 20px;
+  line-height: 23px;
+  color: #000;
+}
+
+.navAdd {
+  /* для хэттера */
+  width: 950px;
+  height: 80px;
+  left: 405px;
+  top: 0px
+}
+
+.navHeadAdd {
+  /* для хэттера */
+  font-size: 28px;
+  line-height: 38px;
+  font-weight: bold;
+  color: #272643;
+}
+
+.p_text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+  color: #8d8d91;
+}
+
+.p_activ {
+
+  text-decoration-line: underline;
+  color: #272643;
+}
+
+.tempphoto {
+  margin-left: 200px;
+  border-radius: 80%;
+  background-color: #9f0a0a;
+  width: 80px;
+  height: 160px;
+  color: #9f0a0a;
+}
+
+.name {
+  width: 252px;
+  height: 25px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 23px;
+  margin-left: 150px;
+}
+
+.rol {
+  margin-left: 180px;
+  width: 126px;
+  height: 19px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+
+.abouthim {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 23px;
+  margin-left: 200px
+}
+
+.searchProfi {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 33px;
+
+}
+
+button {
+  margin-left: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 90px;
+  gap: 10px;
+  width: 500px;
+  height: 200px;
+  left: 8px;
+  top: 66px;
+  background: #272643;
+  border-radius: 10px;
+  width: 150px;
+  height: 19px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 18px;
+  color: #FFFFFF;
+}
+
+.btn2 {
+  margin-left: 0px;
+  width: 300px;
+  height: 50px;
+  background: #272643;
+  border-radius: 10px;
+  color: #fff
+}
+
+.formInputEmail {
+  width: 300px;
+  height: 50px;
+  border-radius: 8px;
+}
+
+.textInput {
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+.ptextZayav {
+  height: 23px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 23px;
+  color: #B9B9B9;
+  width: 180px;
+}
+
+.consul {
+  width: 186px;
+  height: 33px;
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.activZ {
+  color: #323232;
+  text-decoration-line: underline;
+
+}
+
+.inputSearch {
+  padding: 5px 2px 5px 25px;
+  background: url('http://3.bp.blogspot.com/-4w14hQHr5yQ/Tgm6u7KwUkI/AAAAAAAACAI/Hu2poBOPx3g/s25/search.png') no-repeat scroll 0 50%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  gap: 10px;
+  width: 850px;
+  height: 52px;
+  background: #FFFFFF;
+  border: 1px solid #B9B9B9;
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.inputBTN {
+  padding: 16px 79px;
+  background: #272643;
+  color: #FFFFFF;
+  border-radius: 8px;
+}
+
+
+.textInCreate {
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 500;
+}
+btn3{
+  width: 15px; height: 40px; background: #272643; border-radius: 8px; color:#fff
+}
