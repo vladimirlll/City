@@ -17,9 +17,9 @@ class Apply_UserFactory extends Factory
     public function definition()
     {
         $customersCount =   User::where('role_id', '=', 
-                            Role::where('name', '=', 'Заказчик')->get()->id)->count();
+                            Role::where('name', '=', 'Заказчик')->get()[0]->id)->get()->count();
         $specialistsCount = User::where('role_id', '=', 
-                            Role::where('name', '=', 'Специалист')->get()->id)->count();
+                            Role::where('name', '=', 'Специалист')->get()[0]->id)->get()->count();
 
         $appliesCount =     Apply::all()->count();
         return [

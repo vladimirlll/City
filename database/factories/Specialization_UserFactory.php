@@ -18,7 +18,7 @@ class Specialization_UserFactory extends Factory
     {
         $specializationsCount = Specialization::all()->count();
         $specialistsCount = User::where('role_id', '=', 
-                            Role::where('name', '=', 'Специалист')->get()->id)->count();
+                            Role::where('name', '=', 'Специалист')->get()[0]->id)->get()->count();
 
         return [
             //
