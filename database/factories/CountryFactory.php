@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CountryFactory extends Factory
@@ -13,9 +14,10 @@ class CountryFactory extends Factory
      */
     public function definition()
     {
+        $faker = FakerFactory::create('ru_RU');
         return [
             //
-            'name' => $this->faker->unique()->country(),
+            'name' => $faker->unique()->country(),
             'created_at' => time(),
             'updated_at' => time(),
         ];

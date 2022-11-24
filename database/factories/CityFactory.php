@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Country;
 use Exception;
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class CityFactory extends Factory
