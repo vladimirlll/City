@@ -17,3 +17,4 @@ mix.js('resources/js/app.js', 'public/js')
     ]);
 
 mix.postCss('resources/css/styles.css', 'public/css', []);
+mix.js('resources/js/signup.js', 'public/js');

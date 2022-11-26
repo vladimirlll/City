@@ -17,14 +17,12 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('email', 30);
             $table->string('password', 30);
-            $table->string('name', 20);
-            $table->string('surname', 20);
-            $table->string('patronymic', 20);
-            $table->date('bidth_date');
-            $table->string('about', 250);
-            $table->string('portfolio', 400);
-            $table->unsignedBigInteger('city_id');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->string('name', 20)->nullable();
+            $table->string('surname', 20)->nullable();
+            $table->string('patronymic', 20)->nullable();
+            $table->date('bidth_date')->nullable();
+            $table->string('about', 250)->nullable();
+            $table->string('portfolio', 400)->nullable();
             $table->unsignedBigInteger('role_id');
             $table->foreign('role_id')->references('id')->on('roles');
             $table->timestamps();
@@ -38,6 +36,10 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function(Blueprint $table)
+        {
+            $table->dropForeign('users_role_id_foreign');
+        });
         Schema::dropIfExists('users');
     }
 }

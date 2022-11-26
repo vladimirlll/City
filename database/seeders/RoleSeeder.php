@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Country;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-class CountrySeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +15,11 @@ class CountrySeeder extends Seeder
     public function run()
     {
         //
-        Country::factory()
-        ->count(15)
-        ->create();
+        DB::table('roles')->insert
+        (
+            [
+                'name' => 'specialist',
+            ]
+        );
     }
 }

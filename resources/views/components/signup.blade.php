@@ -33,33 +33,30 @@
       </nav>
     </div>
   </div>
-  <form class="row">
-  <br><br>
-    <div class="col-md-4"> </div>
-    <div class="col-md-2" style="text-align: center;" >
-   <p ><strong> <h5 class="registration" >Регистрация</h5> </strong></p><br>
-      <div class="mb-3"><!-- Логин -->
-        <p for="exampleInputEmail1" class="form-label">
-        <label for="exampleInputEmail1" class="form-label boxtext">Электронная почта</label>
-        <input type="email" class="form-control typecharacker" id="exampleInputEmail1" aria-describedby="emailHelp">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label boxtext">Пароль</label>
-        <input type="password" class="form-control typecharacker" id="exampleInputPassword1 ">
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label boxtext"> Пароль ещё раз</label>
-        <input type="password" class="form-control typecharacker" id="exampleInputPassword1" ></div>
-      <div class="mb-3 form-check" style="text-align: left;">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Заказчик<br></label>
-        <br>
-        <input type="checkbox" class="form-check-input" id="exampleCheck2">
-        <label class="form-check-label" for="exampleCheck1">Специалист</label>
-      </div>
-      <button type="submit">Зарегистрироваться</button>
+  <div class="form-container">
+    <strong><h5 class="registration" >Регистрация</h5></strong>
+    <form id="form" action="/register" method="POST">
+      @csrf
+      <label for="email" class="form-label boxtext">Электронная почта</label>
+      <input name="email" type="email" class="form-control typecharacker" id="email" aria-describedby="emailHelp">
+      <label for="password" class="form-label boxtext">Пароль</label>
+      <input name="password" type="password" class="form-control typecharacker" id="password">
+      <label for="password_again" class="form-label boxtext">Пароль ещё раз</label>
+      <input name="password_again" type="password" class="form-control typecharacker" id="password_again">
+      <label class="form-check-label" for="customer">Заказчик<br></label>
+      <input name="role[customer]" type="radio" class="form-check-input" id="customer">
+      <br>
+      <label class="form-check-label" for="specialist">Специалист</label>
+      <input name="role[specialist]" type="radio" class="form-check-input" id="specialist">
+      <input class="btn-signup" name="go" type="submit" value="Зарегистрироваться">
       <p>Уже есть аккаунт? <a href="/login" style="color: #000;">Войти</a></p>
-    </div>
-  </form>
+    </form>
+    <p class="error" id="errorLog">
+      @if($isAlreadySignUp)
+      echo 'Пользователь с таким email уже зарегистрирован';
+      @endif
+    </p>
+  </div>
+  <script src="js/signup.js"></script>
 </body>
 </html>

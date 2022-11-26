@@ -3,15 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Country;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
     //
     public function show()
     {
-        dump(Role::where('name', '=', 'Специалист')->get()->count());
-        //dump(Role::where('name', '=', 'Специалист')->get()[0]->id);
+        $russianCities = City::where('country_id', '=', 
+        Country::where('name', '=', 'Russia')->get()[0]->id)->get()->count();
+        echo 'Городов в России - ' . $russianCities;
     }
 }
