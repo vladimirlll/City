@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\login\main;
 
 use Illuminate\View\Component;
 
-class signup extends Component
+class Main extends Component
 {
     /**
      * Create a new component instance.
@@ -23,6 +23,6 @@ class signup extends Component
      */
     public function render()
     {
-        return view('components.signup');
+        return view('components.login.main.main');
     }
 }

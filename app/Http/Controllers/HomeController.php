@@ -9,6 +9,6 @@ class HomeController extends Controller
     //
     public function show(Request $request)
     {
-        return view('components.home');
+        return view('components.home.page');
     }
 }

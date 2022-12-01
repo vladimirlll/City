@@ -1,62 +1,60 @@
-<!-- Вход -->
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Vladilen CV</title>
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Подключение CSS файла bootstrap 5 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-  <!-- Далее может идти подключение любого другого CSS файла сайта -->
-  <link href="css/styles1.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">  
+    <title>Test</title>
 </head>
-
 <body>
-  <!-- Реализуем хэдер -->
-  <div class="row " > <!--В строку -->
-    <div class="col-md-2"></div>
-    <div class="col"><!--Начиная с 3его столбца -->
-      <nav class="nav navAdd" > <!--nav-класс бутстрапа; navAdd-реализованный класс -->
-        <div class="container">
-              <a class="navbar-brand navHeadAdd" href="/">Город</a> <!-- Название -->
-              <ul class="nav justify-content-end"> <!-- Ссылки -->
-                <li> <a class="nav-link dl"href="/#AboutPlatform">О платформе</a> </li><!--Контекстная ссылка  -->
-                <li> <a class="nav-link dl" href="/#Kontakts">Контакты</a> </li><!-- Контекстная ссылка -->
-                <li> <a class="nav-link dl"  href="/login">Войти</a> </li> <!--Окно Вход  -->
-                <li> <a class="nav-link dl " href="/signup">Зарегистрироваться</a> </li><!--Окно Регистрация -->
-              </ul>
-        </div>
-      </nav>
+    <div class="container">
+      <x-header.header/>
+      <main class="main">
+          <section class="main__signup-form">
+              <div class="section-title title-container main__signup-form__title">
+                  <h1 class="title__text main__signup-form__title__text">Регистрация</h1>
+              </div>
+              <div class="main__signup-form__content">
+                  <form action="/" method="POST" class="main__signup-form__content__form">
+                      <div class="main__signup-form__content__form__item">
+                          <label class="label label-input" for="email">Электронная почта</label>
+                          <input placeholder="Введите email" type="email" class="form-input main__signup-form__content__form__email" id="email">
+                      </div>
+                      <div class="main__signup-form__content__form__item">
+                          <label class="label label-input" for="password">Пароль</label>
+                          <input placeholder="Введите пароль" type="password" class="form-input main__signup-form__content__form__password" id="password">
+                      </div>
+                      <div class="main__signup-form__content__form__item">
+                          <label class="label label-input" for="password_again">Пароль еще раз</label>
+                          <input placeholder="Введите пароль" type="password" class="form-input main__signup-form__content__form__password-again" id="password_again">
+                      </div>
+                      <div class="main__signup-form__content__form__roles">
+                          <div class="main__signup-form__content__form__roles__item">
+                              <input name="role[customer]" type="radio" class="main__signup-form__content__form__customer" id="customer">
+                              <label class="label label-checkbox" for="customer">Заказчик<br></label>
+                          </div>
+                          <div class="main__signup-form__content__form__roles__item">
+                              <input name="role[specialist]" type="radio" class="main__signup-form__content__form__specialist" id="specialist">
+                              <label class="label label-checkbox" for="specialist">Специалист</label>
+                          </div>
+                      </div>
+                      <div class="main__signup-form__content__form__item">
+                          <input type="submit" class="main__signup-form__content__form__submit" value="Зарегистрироваться">
+                      </div>
+                      <div class="main__signup-form__content__form__item">
+                          <p class="main__signup-form__content__form__item__text">
+                              Уже есть аккаунт? <a class="link main__signup-form__content__form__item__text__to-login" href="/">Войти</a>
+                          </p>
+                      </div>
+                  </form>
+              </div>
+          </section>
+      </main>
+      <x-footer.footer />
     </div>
-  </div>
-  <div class="form-container">
-    <strong><h5 class="registration" >Регистрация</h5></strong>
-    <form id="form" action="/register" method="POST">
-      @csrf
-      <label for="email" class="form-label boxtext">Электронная почта</label>
-      <input name="email" type="email" class="form-control typecharacker" id="email" aria-describedby="emailHelp">
-      <label for="password" class="form-label boxtext">Пароль</label>
-      <input name="password" type="password" class="form-control typecharacker" id="password">
-      <label for="password_again" class="form-label boxtext">Пароль ещё раз</label>
-      <input name="password_again" type="password" class="form-control typecharacker" id="password_again">
-      <label class="form-check-label" for="customer">Заказчик<br></label>
-      <input name="role[customer]" type="radio" class="form-check-input" id="customer">
-      <br>
-      <label class="form-check-label" for="specialist">Специалист</label>
-      <input name="role[specialist]" type="radio" class="form-check-input" id="specialist">
-      <input class="btn-signup" name="go" type="submit" value="Зарегистрироваться">
-      <p>Уже есть аккаунт? <a href="/login" style="color: #000;">Войти</a></p>
-    </form>
-    <p class="error" id="errorLog">
-      @if($isAlreadySignUp)
-      echo 'Пользователь с таким email уже зарегистрирован';
-      @endif
-    </p>
-  </div>
-  <script src="js/signup.js"></script>
 </body>
 </html>
