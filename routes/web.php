@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,3 +25,8 @@ Route::get('/signup', [SignupController::class, 'show'])->name('signup');
 Route::post('/register', [SignupController::class, 'register'])->name('register');
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+Route::post('/user/{id}/save', [UserController::class, 'save']);
+Route::get('/user/{id}/edit', [UserController::class, 'edit']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/send/{id}', [UserController::class, 'send']);
+Route::get('/test', [TestController::class, 'show']);

@@ -13,8 +13,6 @@ class TestController extends Controller
     //
     public function show()
     {
-        $russianCities = City::where('country_id', '=', 
-        Country::where('name', '=', 'Russia')->get()[0]->id)->get()->count();
-        echo 'Городов в России - ' . $russianCities;
+        return view('test.show');
     }
 }

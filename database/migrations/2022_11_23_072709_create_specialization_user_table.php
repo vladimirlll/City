@@ -13,7 +13,7 @@ class CreateSpecializationUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('specialization_user', function (Blueprint $table) {
+        Schema::create('specialization__users', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('specialization_id');
             $table->foreign('specialization_id')->references('id')->on('specializations');
@@ -30,6 +30,6 @@ class CreateSpecializationUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('specialization_user');
+        Schema::dropIfExists('specialization__users');
     }
 }
