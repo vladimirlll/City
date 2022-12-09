@@ -6,7 +6,7 @@ use App\Models\City;
     <div class="main__form__content__form__item">
         <label class="label label-input" for="country">Страна</label>
         <select wire:change="changeCountry" wire:model="countryId" name="country[]" id="country" class="form-input">
-            @if(is_null($city))
+            @if(is_null($country))
                 {{-- У пользователя не выбрана стран, просто выводим все страны --}}
                 <option selected value="0" disabled>Выберите страну</option>
                 @foreach ($countries as $countryItem)
@@ -28,16 +28,18 @@ use App\Models\City;
     <div class="main__form__content__form__item">
         <label class="label label-input" for="city">Город</label>
         <select name="city[]" id="city" class="form-input">
-            @if($country == null)
+            @if($countryId == 0)
                 {{-- Страна не была выбрана --}}
                 <option selected value="0" disabled>Выберите город</option>
             @else 
                 {{-- У юзера есть свой город или страна выбрана через select --}}
-                @if($city != null)
+                @if($city != null && $city->country_id == $countryId)
                     {{-- У юзера уже есть свой город --}}
                     @foreach($cities as $cityItem)
                         @if($cityItem->id == $city->id)
                             <option selected value="{{$cityItem->id}}">{{$cityItem->name}}</option>
+                        @else 
+                            <option value="{{$cityItem->id}}">{{$cityItem->name}}</option>
                         @endif
                     @endforeach
                 @else 

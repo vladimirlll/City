@@ -28,5 +28,5 @@ Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
 Route::post('/user/{id}/save', [UserController::class, 'save']);
 Route::get('/user/{id}/edit', [UserController::class, 'edit']);
 Route::get('/user/{id}', [UserController::class, 'show']);
-Route::get('/send/{id}', [UserController::class, 'send']);
+Route::get('/user/send/to/{id}', [UserController::class, 'send']);
 Route::get('/test', [TestController::class, 'show']);
