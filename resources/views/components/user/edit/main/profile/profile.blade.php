@@ -34,98 +34,28 @@ use App\Models\Specialization_User;
                 <label class="label label-input" for="bday">Дата рождения</label>
                 <input value="{{$user->birth_date}}" name="bday" type="date" class="form-input main__form__content__form__bday" id="bday">
             </div>
-            <div class="main__form__content__form__item">
-                <label class="label label-input" for="country">Страна</label>
-                <select name="country[]" id="country" class="form-input">
-                    <option value="0" disabled>Выберите страну</option>
-                    @php 
-                    $countries = Country::all();
-                    $userCity = City::find($user->city_id);
-                    $userCountry = is_null($userCity) ? null : Country::find($userCity->country_id);
-                    @endphp 
-                    @if(is_null($userCity))
-                        @foreach ($countries as $country)
-                        <option value="{{$country->id}}">{{$country->name}}</option>
-                        @endforeach
-                    @else 
-                        @foreach ($countries as $country)
-                            @if($userCountry->id == $country->id)
-                            <option selected value="{{$country->id}}">{{$country->name}}</option>
-                            @else 
-                            <option selected value="{{$country->id}}">{{$country->name}}</option>
-                            @endif
-                        @endforeach
-                    @endif 
-                </select>
-            </div>
-            <div class="main__form__content__form__item">
-                <label class="label label-input" for="city">Город</label>
-                <select name="city[]" id="city" class="form-input">
-                    <option value="0" disabled>Выберите город</option>
-                    @php 
-                    $cities = null;
-                    if(!is_null($userCity))
-                        $cities = City::where('country_id', '=', $userCountry->id)->get();
-                    else
-                        $cities = City::where('country_id', '=', 1)->get();
-                    @endphp
-
-                    @if(is_null($userCity))
-                        @foreach ($cities as $city)
-                        <option value="{{$city->id}}">{{$city->name}}</option>
-                        @endforeach
-                    @else 
-                        @foreach ($cities as $city)
-                            @if($userCity->id == $city->id)
-                            <option selected value="{{$city->id}}">{{$city->name}}</option>
-                            @else 
-                            <option value="{{$city->id}}">{{$city->name}}</option>
-                            @endif
-                        @endforeach
-                    @endif
-                </select>
-            </div>
-            <div class="main__form__content__form__item">
+            <livewire:user.edit.main.profile.city-country :user="$user"/>
+            <div class="form-group main__form__content__form__item">
                 <label class="label label-input" for="about">О себе</label>
-                <textarea required maxlength="400" name="about" id="about" cols="30" rows="10" class="form-input">
-                    {{$user->about}}
-                </textarea>
+                <textarea required maxlength="400" name="about" id="about" rows="3" class="form-control">{{$user->about}}</textarea>
             </div>
             @if($user->role_id == Role::where('name', '=', 'specialist')->get()[0]->id)
-            <div class="main__form__content__form__item">
-                <label class="label label-input" for="skill">Навыки</label>
-                <select multiple="multiple" name="skill[]" id="skill" class="form-input">
-                    <option value="0" disabled>Выберите навык</option>
-                    @php 
-                    $skills = Skill::all();
-                    @endphp 
-                    @foreach($skills as $skill)
-                    <option value="{{$skill->id}}">{{$skill->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="main__form__content__form__item">
-                <label class="label label-input" for="spec">Специализации</label>
-                <select multiple="multiple" name="spec[]" id="spec" class="form-input">
-                    <option value="0" disabled>Выберите специализацию</option>
-                    @php 
-                    $specs = Specialization::all();
-                    @endphp 
-                    @foreach($specs as $spec)
-                    <option value="{{$spec->id}}">{{$spec->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="main__form__content__form__item">
-                <label class="label label-input" for="portfolio">Портфолио</label>
-                <textarea required maxlength="400" name="portfolio" id="portfolio" cols="30" rows="10" class="form-input">
-                    {{$user->portfolio}}
-                </textarea>
-            </div>
+                <x-user.edit.main.profile.Skills :user="$user" />
+                <x-user.edit.main.profile.Specializations :user="$user" />
+                
+                <div class="form-group main__form__content__form__item">
+                    <label class="label label-input" for="portfolio">Портфолио</label>
+                    <textarea class="form-control" required maxlength="400" name="portfolio" id="portfolio" rows="3">{{$user->portfolio}}</textarea>
+                </div>
+                {{--<div class="main__form__content__form__item not-centered">
+                    <label class="label label-input" for="portfolio">Портфолио</label>
+                    <textarea required maxlength="400" name="portfolio" id="portfolio" class="form-input portfolio-text">
+                        {{$user->portfolio}}
+                    </textarea>
+                </div>--}}
             @endif
-
             <div class="main__form__content__form__item">
-                <input type="submit" class="btn profile__edit__submit" value="Сохранить">
+                <input type="submit" class="my-btn profile__edit__submit" value="Сохранить">
             </div>
         </form>
     </div>

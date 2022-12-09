@@ -18,7 +18,7 @@ body
     color: #323232;
 }
 
-.btn
+/*.btn
 {
     display: flex;
     justify-content: center;
@@ -30,6 +30,26 @@ body
     font-weight: 700;
     min-width: 250px;
     text-decoration: none;
+}
+*/
+
+.my-btn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 30px;
+    border-radius: 8px;
+    background-color: #272643;
+    color: #fff;
+    font-weight: 700;
+    min-width: 250px;
+    text-decoration: none;
+}
+
+.my-btn:hover 
+{
+    color: #fff;
 }
 
 .ellipticalbtn
@@ -282,6 +302,7 @@ body
 {
     margin-bottom: 8px;
 }
+
 
 .main__best-specialists__item__speciality
 {
@@ -642,6 +663,17 @@ body
 {
     color: #B9B9B9;
     font-weight: 600;
+}
+
+.not-centered
+{
+    align-items: baseline;
+}
+
+.portfolio-text
+{
+    text-align: left;
+    display: block;
 }
 
 /*====================Profile/Action====================*/

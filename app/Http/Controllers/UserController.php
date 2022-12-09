@@ -49,8 +49,10 @@ class UserController extends Controller
     {
         if(Auth::check())
         {
+            // - Пользователь авторизован
             if(Auth::user()->id == $id)
             {
+                // - Сохраняем того пользователя, который сейчас авторизован
                 $validated = $request->validate
                 (
                     [
@@ -67,63 +69,87 @@ class UserController extends Controller
                 $user->surname = $validated['surname'];
                 $user->patronymic = $validated['patronymic'];
                 $user->about = $validated['about'];
-                $user->city_id = $request->input('city')[0];
+                $user->city_id = is_null($request->input('city'))? null : $request->input('city')[0];
                 $user->birth_date = $request->input('bday');
-                
 
                 if($user->role_id == Role::where('name', '=', 'specialist')->get()[0]->id)
                 {
+                    // Сохраняем специалиста
                     $user->portfolio = $validated['portfolio'];
                     $selectedSkills = $request->input('skill');
                     $selectedSpecs = $request->input('spec');
 
-                    $userSkills = Skill_User::where('specialist_id', '=', $user->id)->get();
-                    foreach($selectedSkills as $skill)
+                    if($selectedSkills != null)
                     {
-                        $isAlreadyHas = false;
-                        $i = 0;
-                        $userSkillsCount = count($userSkills);
-                        while($i < $userSkillsCount && !$isAlreadyHas)
+                        // Есть выбранные навыки
+                        $userSkills = Skill_User::where('specialist_id', '=', $user->id)->get();
+                        foreach($selectedSkills as $skill)
                         {
-                            if($userSkills[$i]->skill_id == $skill)
+                            echo "Обрабатываем скилл - " . $skill . "<br>";
+                            $isAlreadyHas = false;
+                            $i = 0;
+                            $userSkillsCount = count($userSkills);
+                            while($i < $userSkillsCount && !$isAlreadyHas)
                             {
-                                $isAlreadyHas = true;
+                                echo "Сверяем с юзерским скиллом - " . $userSkills[$i]->skill_id . ": ";
+                                if($userSkills[$i]->skill_id == $skill)
+                                {
+                                    echo "Совпадает с обрабатываемым, поэтому не добавляем дубликат <br>";
+                                    $isAlreadyHas = true;
+                                }
+                                else
+                                {
+                                    echo "Не совпадает <br>";
+                                }
+                                ++$i;
                             }
-                        }
-                        if(!$isAlreadyHas)
-                        {
-                            $newSkillUser = new Skill_User;
-                            $newSkillUser->id = null;
-                            $newSkillUser->skill_id = $skill;
-                            $newSkillUser->specialist_id = $user->id;
-                            $newSkillUser->created_at = time();
-                            $newSkillUser->updated_at = time();
-                            $newSkillUser->save();
+                            if(!$isAlreadyHas)
+                            {
+                                $newSkillUser = new Skill_User;
+                                $newSkillUser->id = null;
+                                $newSkillUser->skill_id = $skill;
+                                $newSkillUser->specialist_id = $user->id;
+                                $newSkillUser->created_at = time();
+                                $newSkillUser->updated_at = time();
+                                $newSkillUser->save();
+                            }
                         }
                     }
 
-                    $userSpecs = Specialization_User::where('specialist_id', '=', $user->id)->get();
-                    foreach($selectedSpecs as $spec)
+                    if($selectedSpecs != null)
                     {
-                        $isAlreadyHas = false;
-                        $i = 0;
-                        $userSpecsCount = count($userSpecs);
-                        while($i < $userSpecsCount && !$isAlreadyHas)
+                        // Есть выбранные специальности
+                        $userSpecs = Specialization_User::where('specialist_id', '=', $user->id)->get();
+                        foreach($selectedSpecs as $spec)
                         {
-                            if($userSpecs[$i]->specialization_id == $spec)
+                            echo "Обрабатываем специальность - " . $spec . "<br>";
+                            $isAlreadyHas = false;
+                            $i = 0;
+                            $userSpecsCount = count($userSpecs);
+                            while($i < $userSpecsCount && !$isAlreadyHas)
                             {
-                                $isAlreadyHas = true;
+                                echo "Сверяем с юзерской специальностью - " . $userSpecs[$i]->specialization_id . ": ";
+                                if($userSpecs[$i]->specialization_id == $spec)
+                                {
+                                    echo "Совпадает с обрабатываемой, поэтому не добавляем дубликат <br>";
+                                    $isAlreadyHas = true;
+                                }
+                                else
+                                {
+                                    echo "Не совпадает <br>";
+                                }
+                                ++$i;
                             }
-                        }
-                        if(!$isAlreadyHas)
-                        {
-                            $newSpecUser = new Specialization_User();
-                            $newSpecUser->id = null;
-                            $newSpecUser->specialization_id = $spec;
-                            $newSpecUser->specialist_id = $user->id;
-                            $newSpecUser->created_at = time();
-                            $newSpecUser->updated_at = time();
-                            $newSpecUser->save();
+                            if(!$isAlreadyHas)
+                            {
+                                $newSpecUser = new Specialization_User();
+                                $newSpecUser->id = null;
+                                $newSpecUser->specialization_id = $spec;
+                                $newSpecUser->specialist_id = $user->id;
+                                $newSpecUser->created_at = time();
+                                $newSpecUser->updated_at = time();
+                                $newSpecUser->save();
+                            }
                         }
                     }
                 }
