@@ -6,7 +6,11 @@
     $user = Auth::user();
     $linkText = "";
     if(empty($user->name)) $linkText .= $user->email;
-    else $linkText .= $user->surname . " " . $user->name[0] . " " . $user->patronymic[0];
+    else
+    {
+        $linkText .= $user->surname . " " . $user->name[0] . ". " . $user->patronymic[0] . ".";
+        //dump($linkText);
+    }
 
     $dropedLinks =
     [

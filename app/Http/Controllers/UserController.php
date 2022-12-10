@@ -209,7 +209,7 @@ class UserController extends Controller
 
                 while($i < $myAppliesCount && !$hasFreshApplyAlready)
                 {
-                    if($myApplies[$i]->status != ApplyStatuses::STATUSES['ended'])
+                    if($myApplies[$i]->status != ApplyStatuses::STATUSES['ended'] && $myApplies[$i]->apply_user()->specialist_id == $anotherId)
                         $hasFreshApplyAlready = true;
                     else
                         $i++;
