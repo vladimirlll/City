@@ -684,3 +684,79 @@ body
     border-radius: 8px;
     margin-bottom: 20px;
 }
+
+/*====================Consultations====================*/
+/*====================Consultations/Tabs====================*/
+.tabs 
+{
+    margin-bottom: 50px;
+}
+
+.tabs__items
+{
+    display: flex;
+
+}
+
+.tabs__item
+{
+    margin-right: 50px;
+}
+
+.tabs__body
+{
+
+}
+
+.tabs__block
+{
+    display: none;
+}
+
+.tabs__block:target
+{
+    display: block;
+}
+
+/*====================Consultations/Tabs/Active====================*/
+
+.consultations__item
+{
+    display: flex;
+    flex-direction: column;
+    padding: 25px 40px;
+    align-items: baseline;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15), -2px 4px 7px rgba(0, 0, 0, 0.15);
+    max-width: max-content;
+    margin-bottom: 30px;
+}
+
+
+.consultations__item__info
+{
+    margin-bottom: 30px;
+    
+}
+
+.consultations__item__info__customer
+{
+    display: block;
+    margin-bottom: 20px;
+}
+
+.consultations__item__info__specialist
+{
+    display: block;
+    margin-bottom: 20px;
+}
+
+.consultations__item__actions
+{
+    display: flex;
+
+}
+
+.consultations__item__detailed
+{
+    margin-right: 10px;
+}

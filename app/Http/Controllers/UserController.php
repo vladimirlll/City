@@ -9,7 +9,6 @@ use App\Models\Role;
 use App\Models\Skill_User;
 use App\Models\Specialization_User;
 use App\Models\User;
-use App\Models\Zoom_Api;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -189,14 +188,6 @@ class UserController extends Controller
 
     }
 
-    function getMetting($response) // возвращаем инфу про митинг
-    {
-        return "Meeting ID: ". $response->id."<br>"."Time: "	
-        . $response->start_time."<br>"."Topic: "	. 
-        $response->topic."<br>"."Join URL: ". $response->join_url .
-        "<a href='". $response->join_url ."'>Open URL</a>"."<br>"."Meeting Password: ". $response->password;
-    }
-
     public function review($myId, $anotherId)
     {
         echo 'review from '. $myId . ' to '. $anotherId;
@@ -211,7 +202,7 @@ class UserController extends Controller
             {
                 $me = User::findOrFail($myId);
 
-                $myApplies = $me->applies();
+                $myApplies = $me->getApplies();
                 $myAppliesCount = $myApplies->count();
                 $i = 0;
                 $hasFreshApplyAlready = false;
@@ -252,34 +243,6 @@ class UserController extends Controller
             else abort(404);
         }
         else abort(404);
-        /*
-        $zoom_meeting = new Zoom_Api();
-
-        // входные данные
-        $data = array();
-        $data['topic'] 		= 'Consultation'; // название конференции
-        $data['start_date'] = date('Y-m-d\TH:i:s', strtotime("2022-12-12T12:00"));
-        $data['duration'] 	= 60; // продолжительность
-        $data['type'] 		= 2;
-        $password = function() // функция генерации пароля
-        {
-        $label = ["q","w","e","r","t", "y", "u", "i","o","p","a","s","d","f","g","h","j","k","l","z","x","c","v","b","n","m"];
-        return "".rand(10,99).$label[rand(0, 25)].rand(10,99);;
-        };
-        $data['password'] 	= $password(); //пароль
-
-
-        $response = $zoom_meeting->createMeeting($data);//создаём митинг
-        // print_r($response);
-        // echo "<br>";
-        // if (isset($response->id))
-        // 	echo 'sozdano';
-        // else
-        // 	echo 'net';
-        //echo (isset($response->id));
-        echo "<br>";
-        echo $this->getMetting($response); // выводим митинг на экран
-        */
     }
 
     public function showConsultations($id)
@@ -299,11 +262,12 @@ class UserController extends Controller
                 {
                     $title .= $user->email;
                 }
+
+                return view('components.user.consultations', ['user' => $user, 'title' => $title]);
             }
             else abort(404);
         }
         else abort(404);
-
-        return view('components.user.consultations', ['user' => $user, 'title' => $title]);
+        
     }
 }

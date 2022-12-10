@@ -9,8 +9,13 @@ class Apply extends Model
 {
     use HasFactory;
 
-    public function platform()
+    public function getPlatform() 
     {
-        return $this->belongsTo('apply');
+        return Platform::find($this->platform_id);
+    }
+
+    public function apply_user() : Apply_User
+    {
+        return Apply_User::where('apply_id', $this->id)->first();
     }
 }

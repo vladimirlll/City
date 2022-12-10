@@ -11,16 +11,16 @@ class Apply_User extends Model
 
     public function apply()
     {
-        return $this->belongsTo('applies');
+        return $this->belongsTo(Apply::class);
     }
 
-    public function customer()
+    public function getCustomer()
     {
-        return $this->belongsTo('users');
+        return User::find($this->customer_id);
     }
 
-    public function specialist()
+    public function getSpecialist()
     {
-        return $this->belongsTo('users');
+        return User::find($this->specialist_id);
     }
 }

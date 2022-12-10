@@ -19,7 +19,7 @@ class User extends Model implements Authenticatable
 
     public function role()
     {
-        return $this->belongsTo(Role::class);
+        return Role::find($this->role_id);
     }
 
     public function skill_user()
@@ -37,10 +37,10 @@ class User extends Model implements Authenticatable
         return $this->belongsTo(Apply_User::class);
     }
 
-    public function applies()
+    public function getApplies()
     {
         $applyUserCol = null;
-        if($this->role->name == 'customer')
+        if($this->role()->name == 'customer')
         {
             $applyUserCol = Apply_User::where('customer_id', $this->id)->get();
         }

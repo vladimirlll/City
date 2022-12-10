@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -31,4 +32,7 @@ Route::get('/user/{id}', [UserController::class, 'show']);
 Route::get('/user/{myId}/review/to/{anotherId}', [UserController::class, 'review']);
 Route::get('/user/{myId}/send/to/{anotherId}', [UserController::class, 'send']);
 Route::get('/user/{id}/consultations', [UserController::class, 'showConsultations']);
+Route::get('/user/{id}/consultation/{consId}', [ConsultationController::class, 'show']);
+Route::post('/consultation/apply/{id}', [ConsultationController::class, 'apply']);
+Route::get('/consultation/end/{id}', [ConsultationController::class, 'end']);
 Route::get('/test', [TestController::class, 'show']);
