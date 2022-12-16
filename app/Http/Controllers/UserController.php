@@ -16,39 +16,23 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    //
+    
     public function show($id)
     {
-        $title = "";
         $user = User::findOrFail($id);
-        if(!empty($user->name))
-        {
-            //echo 'name';
-            $title .= $user->name;
-        }
-        else 
-        {
-            $title .= $user->email;
-        }
+        $title = $user->getOutName();
 
         return view('components.user.page', ['user' => $user, 'title' => $title]);
     }
 
     public function edit($id)
     {
-        $title = "";
         $user = User::findOrFail($id);
-        if(!empty($user->name))
-        {
-            $title .= $user->name;
-        }
-        else 
-        {
-            $title .= $user->email;
-        }
+        $title = $user->getOutName();
 
         return view('components.user.edit', ['user' => $user, 'title' => $title]);
     }
+
 
     private function getItemsToAdd(array $selectedItems, Collection $userItems) : array
     {
@@ -188,11 +172,6 @@ class UserController extends Controller
 
     }
 
-    public function review($myId, $anotherId)
-    {
-        echo 'review from '. $myId . ' to '. $anotherId;
-    }
-
     public function send($myId, $anotherId)
     {
         if(Auth::check())
@@ -247,21 +226,12 @@ class UserController extends Controller
 
     public function showConsultations($id)
     {
-        $title = "";
         $user = User::findOrFail($id);
         if(Auth::check())
         {
             if(Auth::user()->id == $id)
             {
-                if(!empty($user->name))
-                {
-                    //echo 'name';
-                    $title .= $user->name;
-                }
-                else 
-                {
-                    $title .= $user->email;
-                }
+                $title = $user->getOutName();
 
                 return view('components.user.consultations', ['user' => $user, 'title' => $title]);
             }

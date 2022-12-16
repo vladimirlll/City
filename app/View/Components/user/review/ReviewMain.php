@@ -1,23 +1,23 @@
 <?php
 
-namespace App\View\Components\user\main\menu;
+namespace App\View\Components\user\review;
 
+use App\Models\User;
 use Illuminate\View\Component;
 
-class Menu extends Component
+class ReviewMain extends Component
 {
-    public $id;
-    public $activeSection;
+    public User $me;
+    public User $another;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($id, $activeSection)
+    public function __construct(User $me, User $another)
     {
-        //
-        $this->id = $id;
-        $this->activeSection = $activeSection;
+        $this->me = $me;
+        $this->another = $another;
     }
 
     /**
@@ -27,6 +27,6 @@ class Menu extends Component
      */
     public function render()
     {
-        return view('components.user.main.menu.menu');
+        return view('components.user.review.review-main');
     }
 }

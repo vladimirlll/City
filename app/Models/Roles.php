@@ -9,4 +9,9 @@ class Roles
         'customer' => 1,
         'specialist' => 2,
     ];
+
+    public static function getNameOfNum(int $num)
+    {
+        return array_search($num, Roles::ROLES);
+    }
 }

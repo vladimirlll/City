@@ -58,4 +58,18 @@ class User extends Model implements Authenticatable
 
         return $applies;
     }
+
+    public function getOutName() 
+    {
+        $result = "";
+        if(!empty($this->surname) && !empty($this->name) && !empty($this->patronymic))
+        {
+            $result = $this->surname . " " . mb_substr($this->name, 0, 1, "UTF-8") . ". " . mb_substr($this->patronymic, 0, 1, "UTF-8") . ".";
+        }
+        else 
+        {
+            $result = $this->email;
+        }
+        return $result;
+    }
 }
