@@ -6,8 +6,11 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use App\Models\Customer;
+use App\Models\Specialist;
 
-class User extends Model implements Authenticatable
+abstract class User extends Model implements Authenticatable
 {
     use HasFactory;
     use AuthenticatableTrait;
@@ -71,5 +74,24 @@ class User extends Model implements Authenticatable
             $result = $this->email;
         }
         return $result;
+    }
+
+    public static function getInstance($id)
+    {
+        $userWithOnlyRoleId = DB::table('users')->where('id', $id)->select('role_id')->first();
+        $roleId = $userWithOnlyRoleId->role_id;
+        if($roleId === null) abort(404);
+        else 
+        {
+            $className = "App\\Models\\";
+            $className .= ucfirst(Roles::getNameOfNum($roleId));
+            $user = $className::find($id);
+            dump($user);
+            /*if($roleId == Roles::ROLES['customer']) return Customer::find($id);
+            else if($roleId == )
+            */
+            
+        }
+        
     }
 }

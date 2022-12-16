@@ -19,10 +19,11 @@ class UserController extends Controller
     
     public function show($id)
     {
-        $user = User::findOrFail($id);
-        $title = $user->getOutName();
+        $user = User::getInstance($id);
+        /*$title = $user->getOutName();
 
         return view('components.user.page', ['user' => $user, 'title' => $title]);
+        */
     }
 
     public function edit($id)
