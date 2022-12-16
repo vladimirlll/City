@@ -20,7 +20,11 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::getInstance($id);
-        /*$title = $user->getOutName();
+        $title = $user->getOutName();
+
+        dump($user);
+        /*
+        $title = $user->getOutName();
 
         return view('components.user.page', ['user' => $user, 'title' => $title]);
         */

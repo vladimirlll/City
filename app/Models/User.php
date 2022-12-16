@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\Customer;
 use App\Models\Specialist;
+use App\View\Components\user\main\profile\spec\SpecData;
 
 abstract class User extends Model implements Authenticatable
 {
@@ -83,14 +84,16 @@ abstract class User extends Model implements Authenticatable
         if($roleId === null) abort(404);
         else 
         {
+            if($roleId == Roles::ROLES['customer']) return Customer::find($id);
+            elseif($roleId == Roles::ROLES['specialist']) return Specialist::find($id);
+            else abort(404);
+
+            /*
             $className = "App\\Models\\";
             $className .= ucfirst(Roles::getNameOfNum($roleId));
             $user = $className::find($id);
-            dump($user);
-            /*if($roleId == Roles::ROLES['customer']) return Customer::find($id);
-            else if($roleId == )
+            return $user;
             */
-            
         }
         
     }

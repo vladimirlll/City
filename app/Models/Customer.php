@@ -10,8 +10,29 @@ class Customer extends User
 {
     use HasFactory;
 
-    public function find($id)
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
+    /*public function __construct()
     {
-        return DB::table('users')->where('id', $id)->first();
+        parent::__construct();
     }
+    */
+
+    public function __construct()
+    {
+        
+    }
+
+    public function getDataFromDB($id)
+    {
+        
+    }
+
+    /*public static function find($id)
+    {
+        $user = DB::table('users')->where('id', $id)->first();
+        dd($user);
+        //return DB::table('users')->where('id', $id)->first();
+    }*/
 }

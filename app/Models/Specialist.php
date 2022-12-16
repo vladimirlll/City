@@ -10,7 +10,11 @@ class Specialist extends User
 {
     use HasFactory;
 
-    public function find($id)
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
+
+    public static function find($id)
     {
         return DB::table('users')->where('id', $id)->first();
     }
