@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Main extends Component
 {
     public User $user;
+    public $id;
     /**
      * Create a new component instance.
      *
@@ -17,6 +18,7 @@ class Main extends Component
     {
         //
         $this->user = $user;
+        $this->id = $this->user->id;
     }
 
     /**

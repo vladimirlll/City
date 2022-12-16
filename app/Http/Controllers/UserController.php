@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Apply;
 use App\Models\Apply_User;
 use App\Models\ApplyStatuses;
+use App\Models\Auth;
 use App\Models\Role;
 use App\Models\Skill_User;
 use App\Models\Specialization_User;
@@ -12,22 +13,21 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        $user = User::getInstance($id);
-        $title = $user->getOutName();
-
-        dump($user);
-        /*
-        $title = $user->getOutName();
-
-        return view('components.user.page', ['user' => $user, 'title' => $title]);
-        */
+        if(Auth::check())
+        {
+            $user = User::getInstance($id);
+    
+            $title = $user->getOutName();
+    
+            return view('components.user.page', ['user' => $user, 'title' => $title]);
+        }
+        else return redirect()->route('login');
     }
 
     public function edit($id)

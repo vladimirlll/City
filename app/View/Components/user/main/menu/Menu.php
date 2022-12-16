@@ -2,10 +2,13 @@
 
 namespace App\View\Components\user\main\menu;
 
+use App\Models\Auth;
+use App\Models\User;
 use Illuminate\View\Component;
 
 class Menu extends Component
 {
+    public $authUser;
     public $id;
     public $activeSection;
     /**
@@ -18,6 +21,7 @@ class Menu extends Component
         //
         $this->id = $id;
         $this->activeSection = $activeSection;
+        $this->authUser = Auth::user();
     }
 
     /**

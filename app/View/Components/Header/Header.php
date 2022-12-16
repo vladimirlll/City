@@ -2,18 +2,21 @@
 
 namespace App\View\Components\Header;
 
+use App\Models\User;
 use Illuminate\View\Component;
 
 class Header extends Component
 {
+    public User $user;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
         //
+        $this->user = $user;
     }
 
     /**

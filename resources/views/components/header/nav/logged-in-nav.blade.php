@@ -1,6 +1,5 @@
 <nav class="nav">
     <x-header.nav.link link="/#about" linkText="О платформе" />
     <x-header.nav.link link="/#contacts" linkText="Контакты"/>
-    <x-header.nav.link link="/login" linkText="Войти"/>
-    <x-header.nav.link link="/signup" linkText="Зарегистрироваться"/>
+    <x-header.nav.drop-down-link :linkText=$linkText :dropedLinks=$dropedLinks />
 </nav>

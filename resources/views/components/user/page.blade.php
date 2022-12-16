@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <x-header.header />
+        <x-header.header :user="$user"/>
         <x-user.main.main :user="$user"/>
         <x-footer.footer />
     </div>

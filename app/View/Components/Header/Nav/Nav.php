@@ -2,18 +2,22 @@
 
 namespace App\View\Components\Header\Nav;
 
+use App\Models\Auth;
+use App\Models\User;
 use Illuminate\View\Component;
 
 class Nav extends Component
 {
+    public User $user;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
         //
+        $this->user = $user;
     }
 
     /**
@@ -23,6 +27,10 @@ class Nav extends Component
      */
     public function render()
     {
-        return view('components.header.nav.nav');
+        if(Auth::check())
+        {
+            return view('components.header.nav.logged-in-nav', ['user' => $this->user]);
+        }
+        else return view('components.header.nav.nav');
     }
 }
