@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <x-header.header />
-        <x-user.review.review-main :me="$me" :another="$another" />
+        <x-user.review.review-main :me="$me" :another="$another" :apply="$apply" />
         <x-footer.footer />
     </div>
 </body>

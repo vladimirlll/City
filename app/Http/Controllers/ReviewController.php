@@ -11,26 +11,46 @@ use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
+    private function canReview(User $from, User $to)
+    {
+        $appliesOfUserS = Apply_User::getAllOf($from, $to);
+        if($appliesOfUserS->isNotEmpty())
+        {
+            $latestApply = Apply::getLatestByConnectTime($appliesOfUserS);
+            if($latestApply->status == ApplyStatuses::STATUSES['ended'])
+            {
+                return true;
+            }
+            else return false;
+        }
+        else return false;
+    }
+
     public function show($myId, $anotherId)
     {
         $me = User::findOrFail($myId);
         $another = User::findOrFail($anotherId);
         if(Auth::check())
         {
-            if(Auth::user()->id == $myId)
+            if(Auth::user()->id == $myId && $this->canReview($me, $another))
             {
                 $title = $me->getOutName();
-
-                return view('components.user.review', ['title' => $title, 'me' => $me, 'another' => $another]);
+                $appliesOfUserS = Apply_User::getAllOf($me, $another);
+                $latestApply = Apply::getLatestByConnectTime($appliesOfUserS);
+                return view('components.user.review', ['title' => $title, 'me' => $me, 'another' => $another, 'apply' =>$latestApply]);
             }
             else abort(404);
         }
         else abort(404);
     }
 
-    public function save(Request $request)
+    public function save(Request $request, $applyId, $meId, $anotherId)
     {
-        $appliesUser = Apply_User::getAllOf(Auth::user());
+        $apply = Apply::findOrFail($applyId);
+        $au = Apply_User::where('apply_id', $apply->id)->first();
+        $me = User::findOrFail($meId);
+        $another = User::findOrFail($anotherId);
+        $appliesUser = Apply_User::getAllOf(User::find($au->customer_id), User::find($au->specialist_id));
         
         if($appliesUser->isNotEmpty())
         {
@@ -40,13 +60,13 @@ class ReviewController extends Controller
                 $mark = $request->input('mark');
                 $comment = $request->input('comment');
 
-                $latestApply->setMarkBy(Auth::user(), $mark);
-                $latestApply->setCommentBy(Auth::user(), $comment);
+                $latestApply->setMarkBy($me, $mark);
+                $latestApply->setCommentBy($me, $comment);
                 $latestApply->save();
+                return redirect()->route('profile', ['id' => $another->id]);
             }
             else abort(404);
         }
         else abort(404);
-        
     }
 }
