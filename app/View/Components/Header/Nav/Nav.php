@@ -32,6 +32,6 @@ class Nav extends Component
         {
             return (new LoggedInNav($this->user))->render();
         }
-        else return view('components.header.nav.nav');
+        else return (new NotLoggedInNav())->render();
     }
 }

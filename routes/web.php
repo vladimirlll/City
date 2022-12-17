@@ -8,6 +8,7 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('/', function(Request $request) {echo 'test';});
 Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::get('/signup', [SignupController::class, 'show'])->name('signup');

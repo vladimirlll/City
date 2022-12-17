@@ -18,7 +18,7 @@
 </head>
 <body>
     <div class="container">
-        <x-header.header />
+        <x-header.header-with-checking />
         <x-user.review.review-main :me="$me" :another="$another" :apply="$apply" />
         <x-footer.footer />
     </div>

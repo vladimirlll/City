@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-      <x-header.header/>
+      <x-header.header-with-checking/>
       @php 
       $signedUp = false;
       @endphp

@@ -5,11 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Apply;
 use App\Models\ApplyInfo;
 use App\Models\ApplyStatuses;
+use App\Models\Auth;
 use App\Models\User;
 use App\Models\Zoom_Api;
 use DateTime;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ConsultationController extends Controller
 {
@@ -20,7 +20,7 @@ class ConsultationController extends Controller
         {
             if(Auth::user()->id == $id)
             {
-                $user = User::findOrFail($id);
+                $user = User::getInstance($id);
 
                 $apply = Apply::findOrFail($consId);
 

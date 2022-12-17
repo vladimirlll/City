@@ -19,7 +19,7 @@
 </head>
 <body>
     <div class="container">
-        <x-header.header />
+        <x-header.header-with-checking />
         <x-user.edit.main.main :user="$user"/>
         <x-footer.footer />
     </div>

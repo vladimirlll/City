@@ -57,6 +57,13 @@ abstract class User extends Model implements Authenticatable
         foreach($applyUserCol as $applyUser)
         {
             $apply = Apply::find($applyUser->apply_id);
+            $conTime = strtotime($apply->connect_time);
+            $endTime = time() + Zoom_Api::PLUS_TIME;
+            if($conTime <= $endTime) 
+            {
+                $apply->status = ApplyStatuses::STATUSES['ended'];
+                $apply->save();
+            }
             $applies->push($apply);
         }
 
@@ -80,6 +87,7 @@ abstract class User extends Model implements Authenticatable
     public static function getInstance($id)
     {
         $userWithOnlyRoleId = DB::table('users')->where('id', $id)->select('role_id')->first();
+        if($userWithOnlyRoleId === null) abort(4040);
         $roleId = $userWithOnlyRoleId->role_id;
         if($roleId === null) abort(404);
         else 

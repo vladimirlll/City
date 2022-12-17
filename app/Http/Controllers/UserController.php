@@ -32,7 +32,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::getInstance($id);
         $title = $user->getOutName();
 
         return view('components.user.edit', ['user' => $user, 'title' => $title]);
@@ -131,7 +131,8 @@ class UserController extends Controller
                     ]
                 );
 
-                $user = User::findOrFail($id);
+                $user = User::getInstance($id);
+                if($user === null) abort(404);
                 $user->name = $validated['name'];
                 $user->surname = $validated['surname'];
                 $user->patronymic = $validated['patronymic'];
@@ -184,7 +185,8 @@ class UserController extends Controller
             // - Пользователь авторизован
             if(Auth::user()->id == $myId)
             {
-                $me = User::findOrFail($myId);
+                $me = User::getInstance($myId);
+                if($me === null) abort(404);
 
                 $myApplies = $me->getApplies();
                 $myAppliesCount = $myApplies->count();
@@ -231,7 +233,7 @@ class UserController extends Controller
 
     public function showConsultations($id)
     {
-        $user = User::findOrFail($id);
+        $user = User::getInstance($id);
         if(Auth::check())
         {
             if(Auth::user()->id == $id)

@@ -24,8 +24,10 @@ class HeaderWithChecking extends Component
      */
     public function render()
     {
+        
         $authUser = Auth::user();
         if(is_null($authUser)) return view('components.header.header-not-logged-in');
         else return view('components.header.header', ['user' => $authUser]);
+        
     }
 }

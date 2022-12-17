@@ -2,6 +2,7 @@
 
 namespace App\View\Components\user;
 
+use App\Models\Auth;
 use App\Models\User;
 use Illuminate\View\Component;
 

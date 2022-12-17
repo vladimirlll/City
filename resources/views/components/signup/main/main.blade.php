@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="main__form__content__form__item">
-                    <input type="submit" class="main__form__content__form__submit" value="Зарегистрироваться">
+                    <input type="submit" class="ellipticalbtn" value="Зарегистрироваться">
                 </div>
                 <div class="main__form__content__form__item">
                     <p class="main__form__content__form__item__text">

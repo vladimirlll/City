@@ -8,12 +8,18 @@
                 <div class="main__form__content__form__item">
                     <label class="label label-input" for="mark">Оценка общения</label>
                     <select name="mark" class="selectpicker" aria-label="size 3 select example" data-live-search="true" title="Выберите оценку" data-width="100%">
-                        <option data-tokens="1" value="1">1</option>
+                        @for($i = $minRate; $i <= $maxRate; $i++)
+                            @if($i == $myRate)
+                                <option selected data-tokens="$i" value="{{$i}}">{{$i}}</option>
+                            @else 
+                                <option data-tokens="$i" value="{{$i}}">{{$i}}</option>
+                            @endif
+                        @endfor
                     </select>
                 </div>
                 <div class="main__form__content__form__item">
                     <label class="label label-input" for="comment">Комментарий</label>
-                    <textarea maxlength="250" name="comment" id="comment" rows="3" class="form-control"></textarea>
+                    <textarea maxlength="250" name="comment" id="comment" rows="3" class="form-control">{{$myComment}}</textarea>
                 </div>
                 <div class="main__form__content__form__item">
                     <input type="submit" class="ellipticalbtn" value="Оставить отзыв">

@@ -42,10 +42,15 @@ class Auth
         {
             if(Hash::check($credentials['password'], $user->password))
             {
-                session(['authUserId' => $user->id]);
+                session([Auth::AUTH_USER_KEY => $user->id]);
                 return true;
             }
             return false;
         }
+    }
+
+    public static function logout()
+    {
+        session([Auth::AUTH_USER_KEY => null]);
     }
 }

@@ -17,6 +17,7 @@ class Zoom_Api
 	// ключ и секрет из приложения JWT
 	private $zoom_api_key = 'VX_UNdDfSTinkXwfeOWHqw';
 	private $zoom_api_secret = '7IFjDkmN4EV9wQoVwZvE9HH0LK8SryfzJ8QU';	
+	public const PLUS_TIME = 3600;
 	
 	//генерация JWT
 	private function generateJWTKey() {
@@ -24,7 +25,7 @@ class Zoom_Api
 		$secret = $this->zoom_api_secret;
 		$token = array(
 			"iss" => $key,
-			"exp" => time() + 3600 
+			"exp" => time() + Zoom_Api::PLUS_TIME, 
 		);
 		return JWT::encode( $token, $secret );
 	}	

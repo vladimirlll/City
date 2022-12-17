@@ -16,20 +16,13 @@ class Apply_User extends Model
 
     public function getCustomer()
     {
-        return User::find($this->customer_id);
+        return User::getInstance($this->customer_id);
     }
 
     public function getSpecialist()
     {
-        return User::find($this->specialist_id);
+        return User::getInstance($this->specialist_id);
     }
-
-    // Возвращает 
-    /*public static function getAllOf(User $user)
-    {
-        $appliesUser = Apply_User::where(Roles::getNameOfNum($user->role_id) . "_id", $user->id)->get();
-        return $appliesUser;
-    }*/
 
     public static function getAllOf(User $firstUser, User $secondUser)
     {

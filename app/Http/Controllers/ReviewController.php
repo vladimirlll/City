@@ -5,18 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Apply;
 use App\Models\Apply_User;
 use App\Models\ApplyStatuses;
+use App\Models\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
     private function canReview(User $from, User $to)
     {
-        $appliesOfUserS = Apply_User::getAllOf($from, $to);
-        if($appliesOfUserS->isNotEmpty())
+        $appliesOfFrom = $from->getApplies();
+        $appliesOfFrom = $appliesOfFrom->sortBy('connect_time');
+        if($appliesOfFrom->isNotEmpty())
         {
-            $latestApply = Apply::getLatestByConnectTime($appliesOfUserS);
+            $latestApply = $appliesOfFrom->last();
             if($latestApply->status == ApplyStatuses::STATUSES['ended'])
             {
                 return true;
@@ -28,15 +29,16 @@ class ReviewController extends Controller
 
     public function show($myId, $anotherId)
     {
-        $me = User::findOrFail($myId);
-        $another = User::findOrFail($anotherId);
+        $me = User::getInstance($myId);
+        $another = User::getInstance($anotherId);
         if(Auth::check())
         {
             if(Auth::user()->id == $myId && $this->canReview($me, $another))
             {
                 $title = $me->getOutName();
-                $appliesOfUserS = Apply_User::getAllOf($me, $another);
-                $latestApply = Apply::getLatestByConnectTime($appliesOfUserS);
+                $appliesOfFrom = $me->getApplies();
+                $appliesOfFrom = $appliesOfFrom->sortBy('connect_time');
+                $latestApply = $appliesOfFrom->last();
                 return view('components.user.review', ['title' => $title, 'me' => $me, 'another' => $another, 'apply' =>$latestApply]);
             }
             else abort(404);
@@ -48,9 +50,10 @@ class ReviewController extends Controller
     {
         $apply = Apply::findOrFail($applyId);
         $au = Apply_User::where('apply_id', $apply->id)->first();
-        $me = User::findOrFail($meId);
-        $another = User::findOrFail($anotherId);
-        $appliesUser = Apply_User::getAllOf(User::find($au->customer_id), User::find($au->specialist_id));
+        $me = User::getInstance($meId);
+        $another = User::getInstance($anotherId);
+        if($me === null || $another == null) abort(404);
+        $appliesUser = Apply_User::getAllOf(User::getInstance($au->customer_id), User::getInstance($au->specialist_id));
         
         if($appliesUser->isNotEmpty())
         {
