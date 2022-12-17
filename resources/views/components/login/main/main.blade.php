@@ -19,7 +19,7 @@
                     <label class="label label-checkbox" for="specialist">Оставаться в системе</label>
                 </div>
                 <div class="main__form__content__form__item">
-                    <input type="submit" class="main__form__content__form__submit" value="Войти">
+                    <input type="submit" class="ellipticalbtn " value="Войти">
                 </div>
                 <div class="main__form__content__form__item">
                     <p class="main__form__content__form__item__text">

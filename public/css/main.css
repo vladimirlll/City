@@ -66,6 +66,11 @@ body
     text-decoration: none;
 }
 
+.ellipticalbtn:hover
+{
+    cursor: pointer;
+}
+
 .btn span 
 {
     display: block;

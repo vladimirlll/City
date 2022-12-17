@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-      <x-header.header/>
+      <x-header.header-not-logged-in/>
       <x-login.main.main />
       <x-footer.footer />
     </div>

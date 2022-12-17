@@ -27,7 +27,7 @@ class Nav extends Component
      */
     public function render()
     {
-        if(Auth::check())
+        if(Auth::check() && Auth::user()->id == $this->user->id)
         {
             return view('components.header.nav.logged-in-nav', ['user' => $this->user]);
         }
