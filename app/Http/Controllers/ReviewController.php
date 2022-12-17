@@ -36,9 +36,8 @@ class ReviewController extends Controller
             if(Auth::user()->id == $myId && $this->canReview($me, $another))
             {
                 $title = $me->getOutName();
-                $appliesOfFrom = $me->getApplies();
-                $appliesOfFrom = $appliesOfFrom->sortBy('connect_time');
-                $latestApply = $appliesOfFrom->last();
+                $appliesUsers = Apply_User::getAllOf($me, $another);
+                $latestApply = Apply::getLatestByConnectTime($appliesUsers);
                 return view('components.user.review', ['title' => $title, 'me' => $me, 'another' => $another, 'apply' =>$latestApply]);
             }
             else abort(404);

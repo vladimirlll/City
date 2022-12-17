@@ -38,7 +38,7 @@ class Action extends Component
             if($this->another->id == $this->me->id) return view('components.user.main.action.my-page-actions', ['me' => $this->me]);
             else
             {
-                if($this->user instanceof Specialist) return view('components.user.main.action.not-my-page-can-review-and-can-send-apply', 
+                if($this->user instanceof Specialist) return view('components.user.main.action.not-my-page-can-review-and-send-apply', 
                 ['me' => $this->me, 'another' => $this->another]);
                 else return view('components.user.main.action.not-my-page-can-review-action', 
                 ['me' => $this->me, 'another' => $this->another]);
