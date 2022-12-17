@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
     //
     public function show()
     {
-        return view('components.login.page');
+        $authUser = null;
+        if(Auth::check()) $authUser = Auth::user();
+        return view('components.login.page', ['authUser' => $authUser]);
     }
 
     public function auth(Request $request)
@@ -25,12 +27,13 @@ class LoginController extends Controller
                 'password' => ['required'],
             ]
         );
-        
+
         if (Auth::attempt($credentials, $remember)) 
         {
+
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            return redirect()->route('home');
         }
 
         return back()->withErrors
@@ -39,5 +42,6 @@ class LoginController extends Controller
                 'email' => 'The provided credentials do not match our records.',
             ]
         )->onlyInput('email');
+        
     }
 }

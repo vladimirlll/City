@@ -12,27 +12,4 @@ class Customer extends User
 
     protected $table = 'users';
     protected $primaryKey = 'id';
-
-    /*public function __construct()
-    {
-        parent::__construct();
-    }
-    */
-
-    public function __construct()
-    {
-        
-    }
-
-    public function getDataFromDB($id)
-    {
-        
-    }
-
-    /*public static function find($id)
-    {
-        $user = DB::table('users')->where('id', $id)->first();
-        dd($user);
-        //return DB::table('users')->where('id', $id)->first();
-    }*/
 }

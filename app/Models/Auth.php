@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class Auth 
 {
@@ -19,6 +21,31 @@ class Auth
         {
             $user = User::getInstance(session(Auth::AUTH_USER_KEY));
             return $user;
+        }
+        else return null;
+    }
+
+    public static function attempt($credentials, $remember)
+    {
+        $builder = DB::table('users');
+
+        foreach($credentials as $field => $val)
+        {
+            if($field != 'password' && $field != 'email') return false;
+        }
+        
+        $builder->where('email', '=', $credentials['email']);
+        $user = $builder->first();
+
+        if(is_null($user)) return false;
+        else
+        {
+            if(Hash::check($credentials['password'], $user->password))
+            {
+                session(['authUserId' => $user->id]);
+                return true;
+            }
+            return false;
         }
     }
 }

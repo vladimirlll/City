@@ -4,6 +4,7 @@ namespace App\View\Components\Header\Nav;
 
 use App\Models\Auth;
 use App\Models\User;
+use App\View\Components\header\nav\LoggedInNav;
 use Illuminate\View\Component;
 
 class Nav extends Component
@@ -29,7 +30,7 @@ class Nav extends Component
     {
         if(Auth::check() && Auth::user()->id == $this->user->id)
         {
-            return view('components.header.nav.logged-in-nav', ['user' => $this->user]);
+            return (new LoggedInNav($this->user))->render();
         }
         else return view('components.header.nav.nav');
     }

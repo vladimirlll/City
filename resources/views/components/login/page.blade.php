@@ -12,7 +12,11 @@
 </head>
 <body>
     <div class="container">
-      <x-header.header-not-logged-in/>
+      @if(is_null($authUser))
+        <x-header.header-not-logged-in/>
+      @else 
+        <x-header.header :user="$authUser" />
+      @endif
       <x-login.main.main />
       <x-footer.footer />
     </div>

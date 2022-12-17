@@ -14,7 +14,7 @@
 
 <body>
   <div class="container">
-    <x-header.header/>
+    <x-header.header-with-checking/>
     <x-home.main.main />
     <x-footer.footer />
   </div>
