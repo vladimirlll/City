@@ -710,7 +710,7 @@ body
 
 .tabs__body
 {
-
+    padding-top: 10px;
 }
 
 .tabs__block
