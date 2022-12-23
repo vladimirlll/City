@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-        <x-header.header />
+        <x-header.header-with-checking />
         <x-user.main.consultation :user="$user" :consult="$consult"/>
         <x-footer.footer />
     </div>

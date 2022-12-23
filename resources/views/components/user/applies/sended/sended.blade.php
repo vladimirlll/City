@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-      <x-header.header/>
+      <x-header.header-with-checking />
       <x-user.applies.sended.main.main />
       <x-footer.footer />
     </div>

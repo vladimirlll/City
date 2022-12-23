@@ -57,9 +57,10 @@ abstract class User extends Model implements Authenticatable
         foreach($applyUserCol as $applyUser)
         {
             $apply = Apply::find($applyUser->apply_id);
+            //dump($apply);
             $conTime = strtotime($apply->connect_time);
-            $endTime = time() + Zoom_Api::PLUS_TIME;
-            if($conTime <= $endTime) 
+            $endTime = time() + Zoom_Api::PLUS_TIME; 
+            if(!is_null($apply->connect_time) && $conTime <= $endTime) 
             {
                 $apply->status = ApplyStatuses::STATUSES['ended'];
                 $apply->save();

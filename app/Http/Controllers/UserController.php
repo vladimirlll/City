@@ -189,6 +189,7 @@ class UserController extends Controller
                 if($me === null) abort(404);
 
                 $myApplies = $me->getApplies();
+                //dd($myApplies);
                 $myAppliesCount = $myApplies->count();
                 $i = 0;
                 $hasFreshApplyAlready = false;
@@ -205,9 +206,9 @@ class UserController extends Controller
                 {
                     $newApply = new Apply;
                     $newApply->id = null;
+                    $newApply->connect_time = null;
                     $newApply->status = ApplyStatuses::STATUSES['sended'];
                     $newApply->save();
-
 
                     $newApplyUser = new Apply_User;
                     $newApplyUser->id = null;
