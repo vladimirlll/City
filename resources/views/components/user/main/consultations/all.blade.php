@@ -41,8 +41,12 @@
                                 
                                 <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->surname}} {{$consult->getCustomer()->name[0]}}. {{$consult->getCustomer()->patronymic[0]}}.</a>
                                 <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->surname}} {{$consult->getSpecialist()->name[0]}}. {{$consult->getSpecialist()->patronymic[0]}}.</a>
+                                @if($consult->getPlatform() !== null)
                                 <p class="consultations__item__info__platform">Платформа: {{$consult->getPlatform()->name}}</p>
+                                @endif 
+                                @if(!is_null($consult->getDateTime()))
                                 <p class="consultations__item__info__time">Время связи: {{$consult->getDateTime()}}</p>
+                                @endif
                             </div>
                         </div>
 
