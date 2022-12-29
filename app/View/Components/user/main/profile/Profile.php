@@ -6,11 +6,16 @@ use Illuminate\View\Component;
 use App\Models\User;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\Review;
 use App\Models\Role;
 
 class Profile extends Component
 {
     public User $user;
+    public $userCityStr;
+    public $userCountryStr;
+    public $roleAndAgeStr;
+    public $maxMark;
     /**
      * Create a new component instance.
      *
@@ -18,8 +23,26 @@ class Profile extends Component
      */
     public function __construct(User $user)
     {
-        //
         $this->user = $user;
+        $roleName = $this->user->getRoleName();
+        $age = empty($this->user->age) ? "" : $this->user->age;
+
+        // Формирование строки возраста
+        $ageStr = "";
+        if(!empty($age))
+        {
+            if($age % 10 == 1) $ageStr = $age . " год";
+            else if($age % 10 == 2 || $age % 10 == 3 || $age % 10 == 4) $ageStr = $age . " года";
+            else $ageStr = $age . " лет";
+        }
+
+        $this->roleAndAgeStr = $roleName;
+        if(!empty($age)) $this->roleAndAgeStr .= $ageStr;
+
+        $this->userCityStr = empty($this->user->city_id) ? "" : City::find($this->user->city_id)->name;
+        $this->userCountryStr = empty($this->user->city_id) ? "" : Country::find(City::find($this->user->city_id)->country_id)->name;
+
+        $this->maxMark = Review::MAX_MARK;
     }
 
     /**

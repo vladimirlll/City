@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\CommentNotSetException;
+use App\Exceptions\MarkNotSetException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -68,6 +70,8 @@ abstract class User extends Model implements Authenticatable
         return $applies;
     }
 
+    public abstract function getRoleName();
+
     public function getOutName() : string
     {
         $result = "";
@@ -87,11 +91,13 @@ abstract class User extends Model implements Authenticatable
         $marks = collect();
 
         $myApplies = $this->getApplies();
-        dd($myApplies);
         foreach($myApplies as $apply)
         {
-            $anotherUserMarkOfMe = $apply->getMarkOfAnotherUser($this);
-            $marks->push($anotherUserMarkOfMe);
+            try 
+            {
+                $anotherUserMarkOfMe = $apply->getMarkOfAnotherUser($this);
+                $marks->push($anotherUserMarkOfMe);
+            } catch (MarkNotSetException $ex) { }
         }
 
         return $marks;
@@ -118,11 +124,44 @@ abstract class User extends Model implements Authenticatable
         $myApplies = $this->getApplies();
         foreach($myApplies as $apply)
         {
-            $anotherUserCommentOfMe = $apply->getCommentOfAnotherUser($this);
-            $comments->push($anotherUserCommentOfMe);
+            try 
+            {
+                $anotherUserCommentOfMe = $apply->getCommentOfAnotherUser($this);
+                $comments->push($anotherUserCommentOfMe);
+            } catch (CommentNotSetException $ex) {}
         }
 
         return $comments;
+    }
+
+    public function reviews() : Collection
+    {
+        $reviews = collect();
+
+        $myApplies = $this->getApplies();
+        foreach($myApplies as $apply)
+        {
+            $mark = null;
+            $comment = null;
+            $reviewBy = null;
+
+            try 
+            {
+                $anotherUserMarkOfMe = $apply->getMarkOfAnotherUser($this);
+                $mark = $anotherUserMarkOfMe;
+            } catch (MarkNotSetException $ex) { }
+
+            try 
+            {
+                $anotherUserCommentOfMe = $apply->getCommentOfAnotherUser($this);
+                $comment = $anotherUserCommentOfMe;
+            } catch (CommentNotSetException $ex) {}
+
+            $reviewBy = $apply->getInterlocutorOf($this);
+            $reviews->push(new Review($reviewBy, $apply, $mark, $comment));
+        }
+
+        return $reviews;
     }
 
     public static function getInstance($id) : User

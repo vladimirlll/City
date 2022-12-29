@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Exceptions\CommentNotSetException;
+use App\Exceptions\MarkNotSetException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -47,22 +49,41 @@ class Apply extends Model
         if($user->role_id == Roles::ROLES['customer']) $mark = $this->specialist_rate;
         else $mark = $this->customer_rate;
 
-        return (int)$mark;
+        if($mark == null) throw new MarkNotSetException("Оценка от другого пользователя не установлена", 600);
+
+        return $mark;
     }
 
     public function getCommentOfAnotherUser(User $user) : string 
     {
-        if($user->role_id == Roles::ROLES['customer']) return $this->specialist_comment;
-        else return $this->customer_comment;
+        $comment = "";
+
+        if($user->role_id == Roles::ROLES['customer']) $comment = $this->specialist_comment;
+        else $comment = $this->customer_comment;
+
+        if($comment == null) throw new CommentNotSetException("Комментарий от другого пользователя не задан", 601);
+
+        return $comment;
     }
 
     public function getMarkOfThisUser(User $user) : int 
     {
-        return $this->{Roles::getNameOfNum($user->role_id) + "_rate"};
+        $mark = $this->{Roles::getNameOfNum($user->role_id) + "_rate"};
+        if($mark == null) throw new MarkNotSetException("Оценка не установлена", 600); 
+        return $mark;
     }
 
     public function getCommentOfThisUser(User $user) : string 
     {
-        return $this->{Roles::getNameOfNum($user->role_id) + "_comment"};
+        $comment = $this->{Roles::getNameOfNum($user->role_id) + "_comment"};
+        if($comment == null) throw new CommentNotSetException("Комментарий от другого пользователя не задан", 601);
+        return $comment;
+    }
+
+    public function getInterlocutorOf(User $user) : User 
+    {
+        $au = Apply_User::where('apply_id', $this->id)->first();
+        if($user->role_id == Roles::ROLES['customer']) return User::getInstance($au->specialist_id);
+        else return User::getInstance($au->customer_id);
     }
 }

@@ -571,6 +571,13 @@ body
 .profile__data__general__secondary__rating
 {
     font-weight: 300;
+    display: flex;
+    align-items: center;
+}
+
+.icon-star
+{
+    margin-right: 5px;
 }
 
 /*====================Profile/UserData/About====================*/
@@ -863,3 +870,54 @@ body
 /*\\====================Specialists catalog/Items====================*/
 
 /*\\====================Specialists catalog====================*/
+
+/*====================Review/All reviews of user====================*/
+
+.reviews__wraper
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.reviews 
+{
+    width: 100%;
+}
+
+.review__title__text
+{
+    text-align: center;
+    width: 100%;
+    font-size: 24px;
+}
+
+
+.review__item
+{
+    color: #323232;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 40px;
+    align-items: baseline;
+    box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.15), -2px 4px 7px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.review__item__info__text
+{
+    color: #323232;
+    font-size: 16px;
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 400;
+}
+
+.review__item__info__interlocutor
+{
+    color: #272643;
+    font-weight: 500;
+}
+
+/*\\====================Review/All reviews of user====================*/

@@ -6,30 +6,18 @@ use DateTime;
 
 class ApplyInfo 
 {
-    private $id;
+    private Apply $apply;
     private User $customer;
     private User $specialist;
-    private $platform;
-    private $dtime;
-    private $status;
-    private $link;
 
-    function __construct($id, User $customer, User $specialist, $platform, $dtime, $status, $link)
+    function __construct(Apply $apply, User $customer, User $specialist)
     {
-        $this->id = $id;
+        $this->apply = $apply;
         $this->customer = $customer;
         $this->specialist = $specialist;
-        $this->platform = $platform;
-        $this->dtime = $dtime;
-        $this->status = $status;
-        $this->link = $link;
     }
 
+    public function getApply() {return $this->apply;}
     public function getCustomer() {return $this->customer;}
     public function getSpecialist() {return $this->specialist;}
-    public function getPlatform() {return $this->platform;}
-    public function getDateTime() {return $this->dtime;}
-    public function getId() {return $this->id;}
-    public function getStatus() {return $this->status;}
-    public function getLink() {return $this->link;}
 }

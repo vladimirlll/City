@@ -14,11 +14,7 @@ class Specialist extends User
     protected $table = 'users';
     protected $primaryKey = 'id';
 
-    /*public static function all($collumns = ['*']) : Collection
-    {
-        return DB::table('users')->where('role_id', Roles::ROLES['specialist'])->get();
-    }
-    */
+    public function getRoleName() { return "Специалист"; }
 
     public static function getAllBuilder()
     {
