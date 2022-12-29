@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 abstract class User extends Model implements Authenticatable
 {
@@ -184,5 +185,13 @@ abstract class User extends Model implements Authenticatable
             return $user;
         }
         
+    }
+
+    public function getAvatarSrc() : string 
+    {
+        if(Storage::exists('/public/images/users/avatars/' . $this->id))
+            return Storage::url('images/users/avatars/' . $this->id);
+        else 
+            return Storage::url('images/users/avatars/default_avatar.jpg');
     }
 }

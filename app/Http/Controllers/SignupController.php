@@ -62,7 +62,8 @@ class SignupController extends Controller
         }
         else
         {
-            return view('components.signup', ['isAlreadySignUp' => true]);
+            return back()->with('isAlreadySignUp', true);
+            //return view('components.signup', ['isAlreadySignUp' => true]);
         }
     }
 }

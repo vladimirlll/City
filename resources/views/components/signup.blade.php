@@ -12,7 +12,7 @@
 </head>
 <body>
     <div class="container">
-      <x-header.header/>
+      <x-header.header-with-checking/>
       <main class="main">
           <section class="main__signup-form">
               <div class="section-title title-container main__signup-form__title">
@@ -42,6 +42,15 @@
                               <label class="label label-checkbox" for="specialist">Специалист</label>
                           </div>
                       </div>
+                      @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                      @endif
                       <div class="main__signup-form__content__form__item">
                           <input type="submit" class="main__signup-form__content__form__submit" value="Зарегистрироваться">
                       </div>

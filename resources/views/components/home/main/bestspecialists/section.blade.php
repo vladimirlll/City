@@ -1,4 +1,4 @@
-<section class="main__best-specialists">
+<!--<section class="main__best-specialists">
     <div class="section-title main__best-specialists__title">
         <h1 class="main__best-specialists__title__text">Лучшие специалисты</h1>
     </div>
@@ -8,3 +8,4 @@
         @endforeach
     </div>
 </section>
+-->

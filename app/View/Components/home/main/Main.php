@@ -2,10 +2,14 @@
 
 namespace App\View\Components\home\main;
 
+use App\Models\Roles;
+use App\Models\Specialist;
+use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
 class Main extends Component
 {
+    public $bestSpecialists;
     /**
      * Create a new component instance.
      *
@@ -13,7 +17,7 @@ class Main extends Component
      */
     public function __construct()
     {
-        //
+        
     }
 
     /**

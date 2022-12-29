@@ -29,7 +29,7 @@ class ConsultationController extends Controller
                 
                 $customer = $apply->apply_user()->getCustomer();
                 $specialist = $apply->apply_user()->getSpecialist();
-                $newApplyInfo = new ApplyInfo($apply->id, $customer, $specialist, $platform, $dtime, $apply->status, $apply->link);
+                $newApplyInfo = new ApplyInfo($apply, $customer, $specialist);
 
                 return view('components.user.consultation', ['user' => $user, 'consult' => $newApplyInfo]); 
             }
@@ -60,10 +60,13 @@ class ConsultationController extends Controller
     
                 // входные данные
                 $data = array();
-                $data['topic'] 		= 'Consultation'; // название конференции
+                $data['topic'] 		= 'Консультация'; // название конференции
                 $consTime = DateTime::createFromFormat('Y-m-d\TH:i:s', $request->input('time'));
                 $timestamp = strtotime($request->input('time'));
+                //dump($consTime);
+                //dd($request->input('time'));
                 $timestamp -= 3600 * 4;
+                if($timestamp <= time()) return back();
                 //$data['start_date'] = date('Y-m-d\TH:i:s', strtotime($request->input('time')));
                 $data['start_date'] = date('Y-m-d\TH:i:s', $timestamp);
                 $data['duration'] 	= 60; // продолжительность
@@ -84,12 +87,6 @@ class ConsultationController extends Controller
             {
                 echo 'Консультация создана и доступна по ссылке - ' . "<a href=". $apply->link . ">" ."Ссылка</a>";
             }
-
-            
-            /*if(Auth::user()->id == $id)
-            {*/
-            //}
-            //else abort(404);
         }
         else abort(404);
     }

@@ -551,6 +551,13 @@ body
     margin-bottom: 0;
 }
 
+.profile__data__general__avatar
+{
+    border-radius: 50%;
+    width: 170px;
+    height: 170px;
+}
+
 .profile__data__general__name
 {
     font-size: 20px;

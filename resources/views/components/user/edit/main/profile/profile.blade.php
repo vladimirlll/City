@@ -12,12 +12,16 @@ use App\Models\Specialization_User;
 <section class="profile__data">
     <div class="profile__data__general">
         <h2 class="profile__data__general__item">Фото</h2>
-        <img src="/" alt="User avatar" class="profile__data__general__item profile__data__general__avatar">
+        <img src="{{$user->getAvatarSrc()}}" alt="User avatar" class="profile__data__general__item profile__data__general__avatar">
 
     </div>
     <div class="main__form__content">
         <form enctype="multipart/form-data" action="/user/{{$user->id}}/save" method="POST" class="main__signup-form__content__form">
             @csrf
+            <div class="main__form__content__form__item">
+                <label class="label label-input" for="useravatar">Изменить фото</label>
+                <input name="useravatar" type="file" class="form-input main__form__content__form__avatar" id="useravatar">
+            </div>
             <div class="main__form__content__form__item">
                 <label class="label label-input" for="name">Имя</label>
                 <input name="name" value="{{$user->name}}" type="text" class="form-input main__form__content__form__name" id="name">

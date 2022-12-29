@@ -29,14 +29,12 @@ class All extends Component
 
         $allApplies = $this->user->getApplies();
 
+        //dd($allApplies);
         foreach($allApplies as $apply)
         {
-            $platform = $apply->getPlatform();
-            $dtime = $apply->connect_time;
-            
             $customer = $apply->apply_user()->getCustomer();
             $specialist = $apply->apply_user()->getSpecialist();
-            $newApply = new ApplyInfo($apply->id, $customer, $specialist, $platform, $dtime, $apply->status, $apply->link);
+            $newApply = new ApplyInfo($apply, $customer, $specialist);
 
             if($apply->status == ApplyStatuses::STATUSES['sended'])
                 $this->applies->push($newApply);

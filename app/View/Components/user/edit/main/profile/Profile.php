@@ -3,11 +3,13 @@
 namespace App\View\Components\user\edit\main\profile;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Component;
 
 class Profile extends Component
 {
     public User $user;
+    public $avatarSrc;
     /**
      * Create a new component instance.
      *
@@ -17,6 +19,10 @@ class Profile extends Component
     {
         //
         $this->user = $user;
+        if(Storage::exists('/public/images/users/avatars/' . $this->user->id))
+            $this->avatarSrc = Storage::url('images/users/avatars/' . $this->user->id);
+        else 
+            $this->avatarSrc = Storage::url('images/users/avatars/default_avatar.jpg');
     }
 
     /**

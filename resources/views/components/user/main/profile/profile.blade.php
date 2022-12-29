@@ -1,6 +1,6 @@
 <section class="profile__data">
     <div class="profile__data__general">
-        <img src="/" alt="User avatar" class="profile__data__general__item profile__data__general__avatar">
+        <img src="{{$user->getAvatarSrc()}}" alt="User avatar" class="profile__data__general__item profile__data__general__avatar">
         <h2 class="profile__data__general__item profile__data__general__name">{{$user->getOutName()}}</h2>
         <div class="profile__data__general__item profile__data__general__secondary">
             <p class="profile__data__general__secondary__item profile__data__general__secondary__roleage">{{$roleAndAgeStr}}</p>

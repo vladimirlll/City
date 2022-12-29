@@ -133,6 +133,17 @@ class UserController extends Controller
 
                 $user = User::getInstance($id);
                 if($user === null) abort(404);
+
+                if(!is_null($request->file('useravatar')))
+                {
+                    $file = $request->file('useravatar');
+                    $extension = $file->extension(); 
+                    if($extension != "jpg" && $extension != "png") return back();
+                    
+                    //dd($extension);
+                    $file->storeAs('/public/images/users/avatars/', $id);
+                }
+
                 $user->name = $validated['name'];
                 $user->surname = $validated['surname'];
                 $user->patronymic = $validated['patronymic'];

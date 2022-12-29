@@ -20,4 +20,24 @@ class ApplyInfo
     public function getApply() {return $this->apply;}
     public function getCustomer() {return $this->customer;}
     public function getSpecialist() {return $this->specialist;}
+
+    public function getPlatform() 
+    {
+        return Platform::find($this->apply->platform_id);
+    }
+
+    public function getDateTime()
+    {
+        return $this->apply->connect_time;
+    }
+
+    public function getLink()
+    {
+        return $this->apply->link;
+    }
+
+    public function getId()
+    {
+        return $this->apply->id;
+    }
 }

@@ -13,5 +13,5 @@ class Customer extends User
     protected $table = 'users';
     protected $primaryKey = 'id';
 
-    public function getRoleName() {return "Специалист";}
+    public function getRoleName() {return "Заказчик";}
 }

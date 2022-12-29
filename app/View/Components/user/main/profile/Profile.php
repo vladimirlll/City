@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\Review;
 use App\Models\Role;
+use Illuminate\Support\Facades\Storage;
 
 class Profile extends Component
 {
@@ -16,6 +17,7 @@ class Profile extends Component
     public $userCountryStr;
     public $roleAndAgeStr;
     public $maxMark;
+    public $avatarSrc;
     /**
      * Create a new component instance.
      *
@@ -43,6 +45,11 @@ class Profile extends Component
         $this->userCountryStr = empty($this->user->city_id) ? "" : Country::find(City::find($this->user->city_id)->country_id)->name;
 
         $this->maxMark = Review::MAX_MARK;
+
+        if(Storage::exists('/public/images/users/avatars/' . $this->user->id))
+            $this->avatarSrc = Storage::url('images/users/avatars/' . $this->user->id);
+        else 
+            $this->avatarSrc = Storage::url('images/users/avatars/default_avatar.jpg');
     }
 
     /**
