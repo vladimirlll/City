@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CatalogController;
 use App\Http\Controllers\ConsultationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -22,21 +23,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function(Request $request) {echo 'test';});
 Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::get('/signup', [SignupController::class, 'show'])->name('signup');
 Route::post('/register', [SignupController::class, 'register'])->name('register');
 Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
 Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+
 Route::post('/user/{id}/save', [UserController::class, 'save']);
 Route::get('/user/{id}/edit', [UserController::class, 'edit']);
 Route::get('/user/{id}', [UserController::class, 'show'])->name('profile');
+
+
 Route::get('/user/{myId}/send/to/{anotherId}', [UserController::class, 'send']);
 Route::get('/user/{id}/consultations', [UserController::class, 'showConsultations']);
 Route::get('/user/{id}/consultation/{consId}', [ConsultationController::class, 'show']);
 Route::post('/consultation/apply/{id}', [ConsultationController::class, 'apply']);
 Route::get('/consultation/end/{id}', [ConsultationController::class, 'end']);
+
+
 Route::get('/user/{myId}/review/to/{anotherId}', [ReviewController::class, 'show']);
 Route::post('/review_save/{applyId}/from/{meId}/to/{anotherId}', [ReviewController::class, 'save']);
+
+Route::get('/catalog/all', [CatalogController::class, 'all']);
+
 Route::get('/test', [TestController::class, 'show']);

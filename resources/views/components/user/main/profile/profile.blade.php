@@ -33,7 +33,7 @@ $country = empty($user->city_id) ? "" : Country::find(City::find($user->city_id)
             @if (!empty($city))
             <p class="profile__data__general__secondary__item profile__data__general__secondary__location">{{$city}}, {{$country}}</p>
             @endif
-            <p class="profile__data__general__secondary__item profile__data__general__secondary__rating">4.65</p>
+            <p class="profile__data__general__secondary__item profile__data__general__secondary__rating">{{$user->getAvgMark()}}</p>
         </div>
     </div>
     <div class="profile__data__about">

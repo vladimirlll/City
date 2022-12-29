@@ -18,8 +18,8 @@
                         <div class="consultations__item">
                             <div class="link consultations__item__info">
                                 
-                                <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->surname}} {{$consult->getCustomer()->name[0]}}. {{$consult->getCustomer()->patronymic[0]}}.</a>
-                                <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->surname}} {{$consult->getSpecialist()->name[0]}}. {{$consult->getSpecialist()->patronymic[0]}}.</a>
+                                <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->getOutName()}}.</a>
+                                <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->getOutName()}}.</a>
                                 <p class="consultations__item__info__platform">Платформа: {{$consult->getPlatform()->name}}</p>
                                 <p class="consultations__item__info__time">Время связи: {{$consult->getDateTime()}}</p>
                             </div>
@@ -39,8 +39,8 @@
                         <div class="consultations__item">
                             <div class="link consultations__item__info">
                                 
-                                <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->surname}} {{$consult->getCustomer()->name[0]}}. {{$consult->getCustomer()->patronymic[0]}}.</a>
-                                <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->surname}} {{$consult->getSpecialist()->name[0]}}. {{$consult->getSpecialist()->patronymic[0]}}.</a>
+                                <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->getOutName()}}.</a>
+                                <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->getOutName()}}.</a>
                                 @if($consult->getPlatform() !== null)
                                 <p class="consultations__item__info__platform">Платформа: {{$consult->getPlatform()->name}}</p>
                                 @endif 
@@ -59,8 +59,8 @@
                             <div class="consultations__item">
                                 <div class="link consultations__item__info">
                                     
-                                    <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->surname}} {{$consult->getCustomer()->name[0]}}. {{$consult->getCustomer()->patronymic[0]}}.</a>
-                                    <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->surname}} {{$consult->getSpecialist()->name[0]}}. {{$consult->getSpecialist()->patronymic[0]}}.</a>
+                                    <a target="_blank" href="/user/{{$consult->getCustomer()->id}}" class="link consultations__item__info__customer">Заказчик: {{$consult->getCustomer()->getOutName()}}</a>
+                                    <a target="_blank" href="/user/{{$consult->getSpecialist()->id}}" class="link consultations__item__info__specialist">Специалист: {{$consult->getSpecialist()->getOutName()}}</a>
                                 </div>
                                 <div class="consultations__item__actions">
                                     <a href="/user/{{$user->id}}/consultation/{{$consult->getId()}}" class="my-btn consultations__item__detailed">Согласиться на консультацию</a>

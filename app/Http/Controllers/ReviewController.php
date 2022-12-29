@@ -40,7 +40,7 @@ class ReviewController extends Controller
                 $latestApply = Apply::getLatestByConnectTime($appliesUsers);
                 return view('components.user.review', ['title' => $title, 'me' => $me, 'another' => $another, 'apply' =>$latestApply]);
             }
-            else abort(404);
+            else return view('components.review.cant-review');
         }
         else abort(404);
     }

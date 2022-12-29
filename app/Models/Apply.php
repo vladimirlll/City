@@ -40,4 +40,29 @@ class Apply extends Model
     {
         $this->{Roles::getNameOfNum($user->role_id) . "_comment"} = $comment;
     }
+
+    public function getMarkOfAnotherUser(User $user) : int
+    {
+        $mark = 0;
+        if($user->role_id == Roles::ROLES['customer']) $mark = $this->specialist_rate;
+        else $mark = $this->customer_rate;
+
+        return (int)$mark;
+    }
+
+    public function getCommentOfAnotherUser(User $user) : string 
+    {
+        if($user->role_id == Roles::ROLES['customer']) return $this->specialist_comment;
+        else return $this->customer_comment;
+    }
+
+    public function getMarkOfThisUser(User $user) : int 
+    {
+        return $this->{Roles::getNameOfNum($user->role_id) + "_rate"};
+    }
+
+    public function getCommentOfThisUser(User $user) : string 
+    {
+        return $this->{Roles::getNameOfNum($user->role_id) + "_comment"};
+    }
 }

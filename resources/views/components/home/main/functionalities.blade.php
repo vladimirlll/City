@@ -11,8 +11,8 @@
         <p class="main__functionality__title main__functionality__rightside__title">
             Найдите лучшего специалиста для своей задачи
         </p>
-        <a href="/catalog" class="link ellipticalbtn main__functionality__btn main__functionality__rightside__btn">
-            <span class="main__functionality__rightside__btn__text">Создать объявление</span>
+        <a href="/catalog/all" class="link ellipticalbtn main__functionality__btn main__functionality__rightside__btn">
+            <span class="main__functionality__rightside__btn__text">Показать специалистов</span>
         </a>
     </div>
 </section>

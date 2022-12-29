@@ -6,10 +6,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
-use App\Models\Customer;
-use App\Models\Specialist;
-use App\View\Components\user\main\profile\spec\SpecData;
 
 abstract class User extends Model implements Authenticatable
 {
@@ -41,7 +39,7 @@ abstract class User extends Model implements Authenticatable
         return $this->belongsTo(Apply_User::class);
     }
 
-    public function getApplies()
+    public function getApplies() : Collection
     {
         $applyUserCol = null;
         if($this->role()->name == 'customer')
@@ -57,7 +55,6 @@ abstract class User extends Model implements Authenticatable
         foreach($applyUserCol as $applyUser)
         {
             $apply = Apply::find($applyUser->apply_id);
-            //dump($apply);
             $conTime = strtotime($apply->connect_time);
             $endTime = time() + Zoom_Api::PLUS_TIME; 
             if(!is_null($apply->connect_time) && $conTime <= $endTime) 
@@ -71,7 +68,7 @@ abstract class User extends Model implements Authenticatable
         return $applies;
     }
 
-    public function getOutName() 
+    public function getOutName() : string
     {
         $result = "";
         if(!empty($this->surname) && !empty($this->name) && !empty($this->patronymic))
@@ -85,7 +82,50 @@ abstract class User extends Model implements Authenticatable
         return $result;
     }
 
-    public static function getInstance($id)
+    public function getMarks() : Collection
+    {
+        $marks = collect();
+
+        $myApplies = $this->getApplies();
+        dd($myApplies);
+        foreach($myApplies as $apply)
+        {
+            $anotherUserMarkOfMe = $apply->getMarkOfAnotherUser($this);
+            $marks->push($anotherUserMarkOfMe);
+        }
+
+        return $marks;
+    }
+
+    public function getAvgMark() : float 
+    {
+        $avg = 0;
+
+        $allMyMarks = $this->getMarks();
+        if($allMyMarks->count() != 0)
+        {
+            $sumMarks = $allMyMarks->sum();
+            $avg = $sumMarks / $allMyMarks->count();
+        }
+
+        return $avg;
+    }
+
+    public function getComments() : Collection 
+    {
+        $comments = collect();
+
+        $myApplies = $this->getApplies();
+        foreach($myApplies as $apply)
+        {
+            $anotherUserCommentOfMe = $apply->getCommentOfAnotherUser($this);
+            $comments->push($anotherUserCommentOfMe);
+        }
+
+        return $comments;
+    }
+
+    public static function getInstance($id) : User
     {
         $userWithOnlyRoleId = DB::table('users')->where('id', $id)->select('role_id')->first();
         if($userWithOnlyRoleId === null) abort(4040);
@@ -93,16 +133,16 @@ abstract class User extends Model implements Authenticatable
         if($roleId === null) abort(404);
         else 
         {
-            if($roleId == Roles::ROLES['customer']) return Customer::find($id);
+            /*if($roleId == Roles::ROLES['customer']) return Customer::find($id);
             elseif($roleId == Roles::ROLES['specialist']) return Specialist::find($id);
             else abort(404);
+            */
 
-            /*
+            
             $className = "App\\Models\\";
             $className .= ucfirst(Roles::getNameOfNum($roleId));
             $user = $className::find($id);
             return $user;
-            */
         }
         
     }
